@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Calm Music & Loading Screen</title>
+<style>
+  /* Loading Screen */
+  #loading-screen {
+    position: fixed;
+    inset: 0;
+    background: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+  }
+  .spinner {
+    border: 6px solid #eee;
+    border-top: 6px solid #3a86ff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Page styling */
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background: #121212;
+    color: #eee;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  body.loaded {
+    opacity: 1;
+  }
+
+  /* Audio player styling */
+  audio {
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    width: 250px;
+    outline: none;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    border-radius: 6px;
+  }
+  audio:hover {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+  <div class="spinner"></div>
+</div>
+
+<h1>Welcome to the Calm Music Page</h1>
+<p>This page plays calm background music with a smooth loading experience.</p>
+
+<audio controls autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/02/23/audio_78c5b0411d.mp3?filename=calm-ambient-background-11073.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  // Simulate loading delay, then hide loading screen and show content
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const loadingScreen = document.getElementById('loading-screen');
+      loadingScreen.style.opacity = '0';
+      setTimeout(() => loadingScreen.style.display = 'none', 500);
+
+      document.body.classList.add('loaded');
+    }, 3000); // 3 seconds loading
+  });
+</script>
+
+</body>
+</html>
